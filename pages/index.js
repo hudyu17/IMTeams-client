@@ -15,16 +15,18 @@ export default function Home() {
         <h1>
           Upcoming Games
         </h1>
-
+      {/* TODO: Pull game data and dynamically create cards */}
         <div className={styles.grid}>
           <a href="https://nextjs.org/docs" className={styles.card}>
-            <h2>Documentation &rarr;</h2>
-            <p>Find in-depth information about Next.js features and API.</p>
+            <h2>🏀 Aug 14 &rarr;</h2>
+            <p>UC @ New College</p>
+            <p>Athletic Centre Court 4</p>
           </a>
 
           <a href="https://nextjs.org/learn" className={styles.card}>
-            <h2>Learn &rarr;</h2>
-            <p>Learn about Next.js in an interactive course with quizzes!</p>
+            <h2>🏐 Aug 16 &rarr;</h2>
+            <p>SMC @ UC</p>
+            <p>Athletic Centre Multi Sports Hall</p>
           </a>
 
         </div>
