@@ -1,6 +1,8 @@
 import Head from 'next/head'
 import Image from 'next/image'
-import styles from '../styles/Home.module.css'
+import styles from '../styles/Calendar.module.css'
+
+import { Calendar, DatePicker } from "react-multi-date-picker";
 
 export default function Home() {
     return (
@@ -12,21 +14,22 @@ export default function Home() {
         </Head>
   
         <main className={styles.main}>
-          <h1>this is the calendar</h1>
+          {/* <div className={styles.topbar}> */}
+            {/* <Image src="/icon-calendar.svg" layout="fixed" width='32px' height='32px'/> */}
+            <h1>Your Schedule</h1>
+          {/* </div> */}
+          {/* <div> */}
+            <Calendar 
+              className={styles.calendar}
+              multiple
+              value={[new Date(), new Date(2022, 7, 8), new Date(2022, 7, 15)]} 
+            />
+          {/* </div> */}
+          <div className={styles.game}>
+            <h2>july wtv</h2>
+            <p>SMC @ bingbong</p>
+          </div>
         </main>
-  
-        <footer className={styles.footer}>
-          <a
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Powered by{' '}
-            <span className={styles.logo}>
-              <Image src="/vercel.svg" alt="Vercel Logo" width={72} height={16} />
-            </span>
-          </a>
-        </footer>
       </div>
     )
   }
