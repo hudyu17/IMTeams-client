@@ -4,7 +4,7 @@
 
 .main {
   min-height: 100vh;
-  padding: 0.5rem;
+  padding: 0.5rem 0.5rem 6rem;
   flex: 1;
   display: flex;
   flex-direction: column;
@@ -78,6 +78,7 @@
   /* justify-content: center; */
   flex-wrap: wrap;
   /* max-width: 800px; */
+  padding: 0 0 1rem;
 }
 
 .card {
@@ -108,13 +109,33 @@
 
 .card p {
   margin: 0;
-  font-size: 1.25rem;
+  font-size: 1.2rem;
   line-height: 1.5;
 }
 
 .logo {
   height: 1em;
   margin-left: 0.5rem;
+}
+
+.teamgrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 10px;
+}
+
+.teamcard {
+  /* margin: 0.7rem 0; */
+  padding: 0 1rem;
+  text-align: center;
+  color: inherit;
+  text-decoration: none;
+  border: 1px solid #eaeaea;
+  border-radius: 10px;
+  transition: color 0.15s ease, border-color 0.15s ease;
+  box-shadow: 0px 5px 30px 3px rgba(0,0,0,0.1);
+  font-size: 1.1rem;
+  line-height: 1;
 }
 
 @media (max-width: 600px) {

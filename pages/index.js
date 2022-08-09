@@ -18,26 +18,40 @@ export default function Home() {
       {/* TODO: Pull game data and dynamically create cards */}
         <div className={styles.grid}>
           <a href="https://nextjs.org/docs" className={styles.card}>
-            <h2>🏀 Aug 14 &rarr;</h2>
+            <h2>Aug 14 🏀 &rarr;</h2>
             <p>UC @ New College</p>
             <p>Athletic Centre Court 4</p>
           </a>
-
           <a href="https://nextjs.org/learn" className={styles.card}>
-            <h2>🏐 Aug 16 &rarr;</h2>
+            <h2>Aug 16 🏐  &rarr;</h2>
             <p>SMC @ UC</p>
             <p>Athletic Centre Multi Sports Hall</p>
           </a>
-
         </div>
+
         <h1>
-          Stats
+          Your Teams
         </h1>
+        <div className={styles.teamgrid}>
+          <a href="https://nextjs.org/docs" className={styles.teamcard}>
+            <h2>UC 🏀</h2>
+            <p>Division 1</p>
+            <p>4-1-0, 2nd place</p>
+          </a>
 
+          <a href="https://nextjs.org/learn" className={styles.teamcard}>
+            <h2>SMC 🏐</h2>
+            <p>Division 1</p>
+            <p>5-0-0, 1st place</p>
+          </a>
 
+          <a href="https://nextjs.org/learn" className={styles.teamcard}>
+            <h2>UC 🥏</h2>
+            <p>Division 2</p>
+            <p>2-3-0, 3rd place</p>
+          </a>
+        </div>
       </main>
-
-      
     </div>
   )
 }

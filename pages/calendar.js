@@ -2,7 +2,8 @@ import Head from 'next/head'
 import Image from 'next/image'
 import styles from '../styles/Calendar.module.css'
 
-import { Calendar, DatePicker } from "react-multi-date-picker";
+// import { Calendar, DatePicker } from "react-multi-date-picker";
+import Calendar from 'react-calendar';
 
 export default function Home() {
     return (
@@ -21,8 +22,8 @@ export default function Home() {
           {/* <div> */}
             <Calendar 
               className={styles.calendar}
-              multiple
-              value={[new Date(), new Date(2022, 7, 8), new Date(2022, 7, 15)]} 
+              
+              value={new Date(2022, 7, 8)} 
             />
           {/* </div> */}
           <div className={styles.game}>
