@@ -1,0 +1,19 @@
+[
+    {
+        "id": 43, 
+        "day": "Aug 14", 
+        "sport": "🏀", 
+        "teamHome": "New College", 
+        "teamAway": "UC", 
+        "location": "Athletic Centre Court 4"
+    },
+    {
+        "id": 58, 
+        "day": "Aug 21", 
+        "sport": "🏐", 
+        "teamHome": "UC", 
+        "teamAway": "SMC", 
+        "location": "Varsity Centre North Court"
+    }
+]
+    

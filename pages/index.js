@@ -1,8 +1,21 @@
 import Head from 'next/head'
 import Image from 'next/image'
+import Link from 'next/link'
 import styles from '../styles/Home.module.css'
+import useSWR from 'swr';
+
+const fetcher = (url) => fetch(url).then((res) => res.json());
 
 export default function Home() {
+
+  const { data, error } = useSWR('./api/staticdata', fetcher);
+  // Handle error state
+  if (error) return <div>Failed to load</div>;
+  // Handle loading state
+  if (!data) return <div>Loading...</div>;
+
+  const gameArray = JSON.parse(data)
+
   return (
     <div className={styles.container}>
       <Head>
@@ -15,18 +28,36 @@ export default function Home() {
         <h1>
           Upcoming Games
         </h1>
-      {/* TODO: Pull game data and dynamically create cards */}
         <div className={styles.grid}>
-          <a href="https://nextjs.org/docs" className={styles.card}>
+      {/* TODO: Pull game data and dynamically create cards */}
+
+          {gameArray.map((game)=>{
+              return (
+                <Link href={{
+                    pathname: `games/[id]`,
+                    query: { id: game.id }}
+                  }>
+                  <div className={styles.card}>
+                    <h2>{game.day} {game.sport} &rarr;</h2>
+                    <p>{game.teamAway} @ {game.teamHome}</p>
+                    <p>{game.location}</p>
+                  </div>
+              </Link>
+            )})}
+
+          {/* <Link href={`/games/lol`}>
+          <div className={styles.card}>
             <h2>Aug 14 🏀 &rarr;</h2>
             <p>UC @ New College</p>
             <p>Athletic Centre Court 4</p>
-          </a>
+          </div>
+          </Link>
+ 
           <a href="https://nextjs.org/learn" className={styles.card}>
             <h2>Aug 16 🏐  &rarr;</h2>
             <p>SMC @ UC</p>
             <p>Athletic Centre Multi Sports Hall</p>
-          </a>
+          </a> */}
         </div>
 
         <h1>
