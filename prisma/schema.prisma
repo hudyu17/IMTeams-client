@@ -1,0 +1,94 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// Models
+model Player {
+  id        String   @id @default(uuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  name      String
+  email     String   @unique
+  teams     Team[]   @relation(name: "PlayerRosters") // This m-n relationship is implicitly managed in the underlying db. Can be made explicit.
+  // In 1-n relationships only the foreign key manifests in the schema.
+  captainOf Team[]   @relation(name: "CaptainOf") 
+}
+
+model Team {
+  id        String @id @default(uuid())
+  name      String
+  updatedAt DateTime @updatedAt
+  roster    Player[] @relation(name: "PlayerRosters")
+  captain   Player @relation(name: "CaptainOf", fields: [captainId], references: [id])
+  captainId String
+  league    League @relation(name: "TeamLeagues", fields: [leagueId], references: [id])
+  leagueId  String
+  sport     Sport
+  homeGames Game[] @relation(name: "HomeTeamGame")
+  awayGames Game[] @relation(name: "AwayTeamGame")
+}
+
+model Game {
+  id String @id @default(uuid())
+  time DateTime
+  location Location @relation(name: "GameLocation", fields: [locationId], references: [id])
+  locationId String
+  homeTeam   Team @relation(name: "HomeTeamGame", fields: [homeTeamId], references: [id])
+  homeTeamId String
+  awayTeam Team @relation(name: "AwayTeamGame", fields: [awayTeamId], references: [id])
+  awayTeamId String
+  gameResult GameResult?
+}
+
+model GameResult {
+  id String @id @default(uuid())
+  game Game @relation(fields: [gameId], references: [id])
+  gameId String @unique
+  homeTeamScore Int
+  awayTeamScore Int
+  winner Winner
+}
+
+model Location {
+  id      String @id @default(uuid())
+  address String
+  games   Game[] @relation(name: "GameLocation")
+}
+
+model League {
+  id            String @id @default(uuid())
+  name          String
+  teams         Team[] @relation(name: "TeamLeagues")
+  announcements Announcement[] @relation(name:"Announcement")
+}
+
+// Announcements are league-wide in this model
+model Announcement {
+  id       String @id @default(uuid())
+  message  String
+  time     DateTime
+  league   League @relation(name: "Announcement", fields: [leagueId], references: [id])
+  leagueId String
+
+}
+
+// Enums
+enum Sport {
+  SOCCER
+  BASKETBALL
+  VOLLEYBALL
+  ULTIMATE
+}
+
+enum Winner {
+  HOME
+  AWAY
+}
