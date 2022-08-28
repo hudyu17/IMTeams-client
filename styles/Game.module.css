@@ -1,13 +1,38 @@
 .container {
-    padding: 0 1rem;
+    /* padding: 0 1rem; */
 }
 
 .main {
-    min-height: 100vh;
-    padding: 0.5rem 0.5rem 6rem;
-    flex: 1;
-    display: flex;
-    flex-direction: column;
     display: grid;
     grid-template-rows: repeat(4, min-content);
+    grid-gap: 1rem;
+}
+
+.header p {
+    font-size: 1.25rem;
+    line-height: 1rem;
+}
+
+.attendancebar {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-gap: 10px;
+}
+
+.attendancebar button {
+    text-align: center;
+    background-color: #fffffe;
+    line-height: 3rem;
+    border-radius: 10px;
+    border: 0;
+    box-shadow: inset 0px 5px 30px 3px rgba(0,0,0,0.1);
+    font-size: 1rem;
+}
+.attendancebar button:hover,
+.attendancebar button:focus,
+.attendancebar button:active {
+  /* color: #0070f3; */
+  /* outline: 3px solid #0070f3; */
+  color: white;
+  background-color: black;
 }

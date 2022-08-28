@@ -2,12 +2,22 @@ import { useRouter } from "next/router";
 import Head from 'next/head'
 import styles from '../../styles/Game.module.css'
 import useSWR from 'swr';
+import { useState } from "react";
 
 const fetcher = (url) => fetch(url).then((res) => res.json());
 
-export default function Game() {
+// Grab route param to persist as a prop
+export async function getServerSideProps(context) {
+    const gameId = context.query.id
+    console.log(gameId)
+    return {
+      props: {gameId}, 
+    }
+  }
+
+export default function Game({gameId}) {
+    const [attendance, setAttendance] = useState("")
     const router = useRouter()
-    const gameId = router.query["id"]
 
     const { data, error } = useSWR('../api/staticdata', fetcher);
     // Handle error state
@@ -25,8 +35,11 @@ export default function Game() {
         }
     }
 
-    console.log(gameData)
-// BREAKS ON REFRESH LOL
+    function handleClick(value) {
+        // console.log(value);
+        setAttendance(value)
+        console.log(attendance)
+    }
 
     return (
         <div className={styles.container}>
@@ -37,10 +50,22 @@ export default function Game() {
             </Head>
             
             <main className={styles.main}>
-            
-                <h1>{ gameData.day }</h1> 
-            
+                <div className={styles.header}>
+                    <h1>{ gameData.day } { gameData.sport }</h1> 
+                    <p>{gameData.teamAway} @ {gameData.teamHome}</p>
+                    <p>{ gameData.location }</p>
+                </div>
+                <div className={styles.attendancebar}>
+                    <button 
+                        // className={this.state.active ? 'your_className': null}
+                        onClick={() => handleClick('Going')} 
+                        className={styles.button}
+                    >👍 Going</button>
+                    <button onClick={handleClick} className={styles.button}>❓ Maybe</button>
+                    <button onClick={handleClick} className={styles.button}>👎 Can't go</button>
+                </div>
             </main>
         </div>
     )
 }
+
